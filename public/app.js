@@ -9,25 +9,26 @@ let genRand = (start, end) => {
 
 let clicksNeeded = genRand(3, 6)
 
-let theButton = document.createElement('button')
-theButton.innerText = "" + clicksNeeded
-theButton.addEventListener('click', () => {
-    if (won || lost) return
-    timesClicked = timesClicked + 1
-    theButton.innerText = "" + (clicksNeeded - timesClicked)
-    if (timesClicked >= clicksNeeded) {
-        won = true
-        document.getElementById('status').innerText = "you won!"
-    }
-})
 
+let startGame = () => {
 
-body.appendChild(theButton)
+    let theButton = document.createElement('button')
+    theButton.innerText = "" + clicksNeeded
+    theButton.addEventListener('click', () => {
+        if (won || lost) return
+        timesClicked = timesClicked + 1
+        theButton.innerText = "" + (clicksNeeded - timesClicked)
+        if (timesClicked >= clicksNeeded) {
+            won = true
+            document.getElementById('status').innerText = "you won!"
+        }
+    })
+    body.appendChild(theButton)
+    setTimeout(() => {
+        if (won || lost) return
+        lost = true
+        document.getElementById('status').innerText = "You lost!"
+    }, genRand(500, 1300))
+}
 
-
-
-setTimeout(() => {
-    if (won || lost) return
-    lost = true
-    document.getElementById('status').innerText = "You lost!"
-}, genRand(500, 1300)) 
+setTimeout(startGame, genRand(1000, 2000))
