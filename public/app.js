@@ -21,12 +21,18 @@ let clickableButton = (text, index) => {
     body.appendChild(theButton)
 }
 
-clickableButton("one", 0)
-clickableButton("two", 1)
-clickableButton("three", 2)
+let genRand = (start, end) => {
+    return start + Math.floor(Math.random() * (end - start))
+}
+
+let randNum = genRand(2, 7)
+
+for (let i = 0; i < randNum; i++) {
+    clickableButton("button " + i, i)
+}
 
 setTimeout(() => {
     if (won || lost) return
     lost = true
     document.getElementById('status').innerText = "You lost!"
-}, 500 + Math.floor(Math.random() * 800)) 
+}, genRand(500, 800)) 
