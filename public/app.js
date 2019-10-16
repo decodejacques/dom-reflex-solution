@@ -28,4 +28,4 @@ setTimeout(() => {
     if (won || lost) return
     lost = true
     document.getElementById('status').innerText = "You lost!"
-}, 1000) 
+}, 500 + Math.floor(Math.random() * 800)) 
