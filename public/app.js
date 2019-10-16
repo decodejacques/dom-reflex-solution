@@ -1,29 +1,30 @@
 let body = document.querySelector('body')
 let lost = false
 let won = false
-let clicked = [false, false]
-let first = document.createElement('button')
-first.innerText = "one"
-first.addEventListener('click', () => {
-    if (won || lost) return
-    clicked[0] = true
-    if (clicked[0] && clicked[1]) {
-        won = true
-        document.getElementById('status').innerText = "you won!"
-    }
-})
-body.appendChild(first)
-let second = document.createElement('button')
-second.innerText = "two"
-second.addEventListener('click', () => {
-    if (won || lost) return
-    clicked[1] = true
-    if (clicked[0] && clicked[1]) {
-        won = true
-        document.getElementById('status').innerText = "you won!"
-    }
-})
-body.appendChild(second)
+let clicked = []
+
+
+let clickableButton = (text, index) => {
+    clicked.push(false)
+    let theButton = document.createElement('button')
+    theButton.innerText = text
+    theButton.addEventListener('click', () => {
+        if (won || lost) return
+        clicked[index] = true
+        if (clicked.indexOf(false) === -1) {
+            won = true
+            document.getElementById('status').innerText = "you won!"
+        }
+    })
+
+
+    body.appendChild(theButton)
+}
+
+clickableButton("one", 0)
+clickableButton("two", 1)
+clickableButton("three", 2)
+
 setTimeout(() => {
     if (won || lost) return
     lost = true
