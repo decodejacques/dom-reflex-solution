@@ -3,14 +3,19 @@ let lost = false
 let won = false
 let timesClicked = 0
 
+let genRand = (start, end) => {
+    return start + Math.floor(Math.random() * (end - start))
+}
 
+let clicksNeeded = genRand(3, 6)
 
 let theButton = document.createElement('button')
-theButton.innerText = "click me"
+theButton.innerText = "" + clicksNeeded
 theButton.addEventListener('click', () => {
     if (won || lost) return
     timesClicked = timesClicked + 1
-    if (timesClicked >= 3) {
+    theButton.innerText = "" + (clicksNeeded - timesClicked)
+    if (timesClicked >= clicksNeeded) {
         won = true
         document.getElementById('status').innerText = "you won!"
     }
@@ -19,12 +24,10 @@ theButton.addEventListener('click', () => {
 
 body.appendChild(theButton)
 
-let genRand = (start, end) => {
-    return start + (Math.random() * (end - start))
-}
+
 
 setTimeout(() => {
     if (won || lost) return
     lost = true
     document.getElementById('status').innerText = "You lost!"
-}, genRand(500, 800)) 
+}, genRand(500, 1300)) 
