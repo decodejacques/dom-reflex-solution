@@ -34,9 +34,16 @@ let startGame = () => {
 
 
     let theButton = document.createElement('button')
+    // a DOM element needs to have position:absolute to move it anywhere you want
+    theButton.style.position = 'absolute'
     theButton.innerText = "" + clicksNeeded
     theButton.addEventListener('click', () => {
         if (won || lost) return
+
+        // randomly place the DOM element a certain number of pixels from the top and left
+        theButton.style.left = genRand(100, 200) + "px"
+        theButton.style.top = genRand(100, 200) + "px"
+
         timesClicked = timesClicked + 1
         theButton.innerText = "" + (clicksNeeded - timesClicked)
         if (timesClicked >= clicksNeeded) {
